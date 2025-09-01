@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sub & Like to Unlock</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    .btn {
+      padding: 12px 24px;
+      margin: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+    .subscribe { background: #ff0000; color: #fff; }
+    .like { background: #007bff; color: #fff; }
+    .download { background: #28a745; color: #fff; display: none; }
+    .locked {
+      margin-top: 20px;
+      font-size: 18px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎁 Vui lòng Subscribe & Like để mở khóa link</h2>
+  
+  <button class="btn subscribe" onclick="subscribe()">📺 Subscribe</button>
+  <button class="btn like" onclick="like()">👍 Like</button>
+  
+  <div class="locked" id="status">🔒 Link đang bị khóa...</div>
+
+  <br>
+  <button class="btn download" id="downloadBtn" onclick="goDownload()">⬇️ Download</button>
+
+  <script>
+    let sub = false;
+    let liked = false;
+
+    function subscribe() {
+      // Mở kênh YouTube của bạn
+      window.open("https://www.youtube.com/@ANGAMINHIOROID", "_blank");
+      sub = true;
+      checkUnlock();
+    }
+
+    function like() {
+      // Mở video mẫu (bạn có thể thay ID video khác)
+      window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+      liked = true;
+      checkUnlock();
+    }
+
+    function checkUnlock() {
+      if (sub && liked) {
+        document.getElementById("status").innerText = "⏳ Đang mở khóa, vui lòng chờ 5 giây...";
+        setTimeout(() => {
+          document.getElementById("status").innerText = "✅ Link đã mở khóa!";
+          document.getElementById("downloadBtn").style.display = "inline-block";
+        }, 5000);
+      }
+    }
+
+    function goDownload() {
+      // Chuyển trực tiếp đến link Google Drive
+      window.location.href = "https://drive.google.com/file/d/1dPqnI9FKwb6Oqx9BJ8hyRMzgpjzqtPjs/view";
+    }
+  </script>
+</body>
+</html>
