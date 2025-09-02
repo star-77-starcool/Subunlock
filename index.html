@@ -1,77 +1,62 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sub & Like to Unlock</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
-    }
-    .btn {
-      padding: 12px 24px;
-      margin: 10px;
-      font-size: 18px;
-      cursor: pointer;
-      border: none;
-      border-radius: 6px;
-      transition: 0.3s;
-    }
-    .subscribe { background: #ff0000; color: #fff; }
-    .like { background: #007bff; color: #fff; }
-    .download { background: #28a745; color: #fff; display: none; }
-    .locked {
-      margin-top: 20px;
-      font-size: 18px;
-      color: gray;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sub & Like Unlock - 5 nút Download</title>
+<style>
+body { font-family:'Poppins',sans-serif; background:linear-gradient(135deg,#f9f9f9,#e0e7ff); display:flex; justify-content:center; align-items:center; height:100vh; margin:0; }
+.container { background:#fff; padding:50px 40px; border-radius:20px; text-align:center; max-width:500px; width:90%; box-shadow:0 10px 30px rgba(0,0,0,0.2);}
+.btn { display:inline-block; padding:14px 28px; font-size:16px; color:#fff; background-color:#FF0000; border:none; border-radius:10px; cursor:pointer; margin:10px; transition:all 0.3s ease; text-decoration:none; }
+.btn:hover { transform:scale(1.05); }
+.btn.done { background-color:#28a745; pointer-events:none; }
+.download-links { display:none; margin-top:20px; }
+.download-links a { display:block; margin:10px 0; background:#007bff; }
+.download-links a:hover { background:#0056b3; }
+</style>
 </head>
 <body>
-  <h2>🎁 Vui lòng Subscribe & Like để mở khóa link</h2>
+<div class="container">
+  <h1>Sub & Like để mở khóa</h1>
+  <p>Nhấn Subscribe và Like để hiển thị các nút Download.</p>
+  <a href="https://www.youtube.com/@ANGAMINGIOROID?sub_confirmation=1" target="_blank" class="btn" id="subscribeBtn">Subscribe</a>
+  <a href="https://youtu.be/xdbaRKKAoyg?si=jR0C3-wjZoENuC7C" target="_blank" class="btn" id="likeBtn">Like</a>
   
-  <button class="btn subscribe" onclick="subscribe()">📺 Subscribe</button>
-  <button class="btn like" onclick="like()">👍 Like</button>
-  
-  <div class="locked" id="status">🔒 Link đang bị khóa...</div>
+  <div class="download-links" id="downloadLinks">
+    <a href="https://www.mediafire.com/file/q7j8s39auxb5xjx/KRNL+x+VNG+M%E1%BB%9Fi+Nh%E1%BA%A5t.apk/file" target="_blank" class="btn">Krnl VNG Android</a>
+    <a href="https://www.mediafire.com/file/pw1u42aiwlnb6co/KRNL_Qu%E1%BB%91c_T%E1%BA%BF_V2.687.apk/file" target="_blank" class="btn">Krnl Quốc tế Android</a>
+    <a href="https://anotepad.com/notes/gt85wwbd" target="_blank" class="btn">Link Script</a>
+    <a href="https://drive.google.com/file/d/1dPqnI9FKwb6Oqx9BJ8hyRMzgpjzqtPjs/view?usp=share_link" target="_blank" class="btn">Krnl VNG iOS</a>
+    <a href="https://box64droid.com/krnl.ipa" target="_blank" class="btn">Krnl Quốc tế iOS</a>
+  </div>
+</div>
 
-  <br>
-  <button class="btn download" id="downloadBtn" onclick="goDownload()">⬇️ Download</button>
+<script>
+let subscribed = false;
+let liked = false;
 
-  <script>
-    let sub = false;
-    let liked = false;
+const subscribeBtn = document.getElementById('subscribeBtn');
+const likeBtn = document.getElementById('likeBtn');
+const downloadLinks = document.getElementById('downloadLinks');
 
-    function subscribe() {
-      // Mở kênh YouTube của bạn
-      window.open("https://www.youtube.com/@ANGAMINHIOROID", "_blank");
-      sub = true;
-      checkUnlock();
-    }
+subscribeBtn.addEventListener('click', ()=>{
+  subscribed = true;
+  subscribeBtn.classList.add('done');
+  subscribeBtn.textContent = "Done ✔";
+  checkUnlock();
+});
+likeBtn.addEventListener('click', ()=>{
+  liked = true;
+  likeBtn.classList.add('done');
+  likeBtn.textContent = "Done ✔";
+  checkUnlock();
+});
 
-    function like() {
-      // Mở video mẫu (bạn có thể thay ID video khác)
-      window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
-      liked = true;
-      checkUnlock();
-    }
-
-    function checkUnlock() {
-      if (sub && liked) {
-        document.getElementById("status").innerText = "⏳ Đang mở khóa, vui lòng chờ 5 giây...";
-        setTimeout(() => {
-          document.getElementById("status").innerText = "✅ Link đã mở khóa!";
-          document.getElementById("downloadBtn").style.display = "inline-block";
-        }, 5000);
-      }
-    }
-
-    function goDownload() {
-      // Chuyển trực tiếp đến link Google Drive
-      window.location.href = "https://drive.google.com/file/d/1dPqnI9FKwb6Oqx9BJ8hyRMzgpjzqtPjs/view";
-    }
-  </script>
+function checkUnlock(){
+  if(subscribed && liked){
+    downloadLinks.style.display = "block";
+  }
+}
+</script>
 </body>
 </html>
