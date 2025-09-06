@@ -1,221 +1,160 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sub Unlock Page</title>
-<style>
+  <meta charset="UTF-8">
+  <title>Sub Unlock</title>
+  <style>
     body {
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        color: #fff;
-    }
-
-    .container {
-        text-align: center;
-        background: rgba(0,0,0,0.7);
-        padding: 50px;
-        border-radius: 20px;
-        box-shadow: 0 0 30px rgba(0,0,0,0.5);
-        animation: fadeIn 1s ease-in-out;
-        position: relative;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(270deg, #1e3c72, #2a5298, #1e3c72);
+      background-size: 600% 600%;
+      animation: gradientBG 20s ease infinite;
+      color: white;
+      text-align: center;
+      padding: 50px;
+      overflow-x: hidden;
     }
 
     h1 {
-        margin-bottom: 25px;
-        font-size: 2rem;
-        animation: slideIn 1s ease-out;
+      animation: fadeInDown 1.5s ease;
+      font-size: 28px;
     }
 
-    button {
-        padding: 15px 40px;
-        margin: 12px;
-        font-size: 1.1rem;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        background-color: #ff5c5c;
-        color: #fff;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        position: relative;
-        overflow: hidden;
+    .task-btn {
+      display: inline-block;
+      margin: 15px;
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #ff4747;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    button:hover {
-        transform: translateY(-3px) scale(1.05);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    .task-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
     }
 
-    button.done {
-        background-color: #28a745;
-        animation: pulse 1s infinite;
+    .task-btn.done {
+      background: #28a745 !important;
+      cursor: default;
+      animation: shine 2s linear infinite;
     }
 
-    button:disabled {
-        cursor: not-allowed;
-        opacity: 0.7;
-        transform: none !important;
-        animation: none !important;
+    .downloads {
+      display: none;
+      margin-top: 40px;
     }
 
-    .download-buttons {
-        display: none;
-        flex-direction: column;
-        margin-top: 25px;
-        opacity: 0;
-        animation: fadeInDownloads 1s forwards;
+    .download-btn {
+      display: block;
+      margin: 12px auto;
+      padding: 15px 30px;
+      font-size: 18px;
+      background: #007bff;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s forwards;
     }
 
-    .download-buttons a {
-        text-decoration: none;
-        background-color: #007bff;
-        color: white;
-        padding: 14px;
-        border-radius: 10px;
-        margin: 6px 0;
-        transition: transform 0.2s, background-color 0.3s;
+    .download-btn:hover {
+      background: #0056b3;
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.8);
     }
 
-    .download-buttons a:hover {
-        transform: scale(1.08);
-        background-color: #0056b3;
-    }
-
-    p.thankyou {
-        margin-top: 20px;
-        font-size: 1rem;
-        color: #ffd700;
-        display: none;
-    }
-
-    .timer {
-        font-size: 2rem;
-        margin-top: 20px;
-        color: #00ffea;
-        display: none;
-        animation: blink 1s infinite;
+    .thankyou {
+      margin-top: 40px;
+      font-size: 18px;
+      font-style: italic;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 1s;
     }
 
     /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     @keyframes fadeIn {
-        from {opacity: 0;}
-        to {opacity: 1;}
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    @keyframes slideIn {
-        from {transform: translateY(-20px); opacity:0;}
-        to {transform: translateY(0); opacity:1;}
+    @keyframes shine {
+      0% { box-shadow: 0 0 5px #28a745, 0 0 10px #28a745; }
+      50% { box-shadow: 0 0 20px #28a745, 0 0 40px #28a745; }
+      100% { box-shadow: 0 0 5px #28a745, 0 0 10px #28a745; }
     }
 
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 rgba(0,0,0,0.3); }
-        50% { box-shadow: 0 0 20px rgba(0,0,0,0.6); }
-        100% { box-shadow: 0 0 0 rgba(0,0,0,0.3); }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-
-    @keyframes fadeInDownloads {
-        0% {opacity: 0; transform: translateY(20px);}
-        100% {opacity: 1; transform: translateY(0);}
-    }
-
-    @keyframes blink {
-        0%, 50%, 100% { opacity: 1; }
-        25%, 75% { opacity: 0; }
-    }
-</style>
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Hoàn thành các nhiệm vụ để mở khóa link!</h1>
+  <h1>🔓 Sub Unlock - Hoàn thành nhiệm vụ để tải xuống</h1>
 
-    <!-- Nút Subscribe -->
-    <button id="subBtn">Subscribe kênh</button>
+  <button id="subBtn" class="task-btn" onclick="completeTask(this, 'https://www.youtube.com/@ANGAMINGIOROID')">
+    📺 Subcribe Channel
+  </button>
 
-    <!-- Nút Like Video -->
-    <button id="likeBtn">Like Video</button>
+  <button id="likeBtn" class="task-btn" onclick="completeTask(this, 'https://youtube.com/watch?v=xdbaRKKAoyg&si=jSsXTe4FkvOhhBzq')">
+    👍 Like Video
+  </button>
 
-    <!-- Timer -->
-    <div class="timer" id="timer">5</div>
+  <div class="downloads" id="downloads">
+    <a class="download-btn" href="https://www.mediafire.com/file/ebxi8k0h7qu5u8m/KrnlVn+688_Antiband.ipa/file" target="_blank">📥 KRNL VNG IOS</a>
+    <a class="download-btn" href="https://www.mediafire.com/file/i8e4bfpogbigw6t/KRNL+x+VNG+V2.687+Update.apk/file" target="_blank">📥 KRNL VNG ANDROID</a>
+    <a class="download-btn" href="https://www.mediafire.com/file/pw1u42aiwlnb6co/KRNL_Qu%25E1%25BB%2591c_T%25E1%25BA%25BF_V2.687.apk/file" target="_blank">📥 KRNL QUỐC TẾ ANDROID</a>
+    <a class="download-btn" href="https://anotepad.com/notes/7cknt55j" target="_blank">📜 LINK SCRIPT TRÊN VID</a>
+  </div>
 
-    <!-- Download buttons -->
-    <div class="download-buttons" id="downloads">
-        <a href="https://www.mediafire.com/file/6ep1wjsbxhusgt8/DeltaVN+688_Antiband.ipa/file" target="_blank">DELTA VNG IOS</a>
-        <a href="https://www.mediafire.com/file/hi06o1x8gfl5spy/Delta+x+VNG+Không+Cài+Đè.apk/file" target="_blank">DELTA VNG ANDROID</a>
-        <a href="https://www.mediafire.com/file/k2tl5idyjlq2bua/Delta+Quốc+Tế+V2.687.apk/file" target="_blank">DELTA QUỐC TẾ ANDROID</a>
-        <a href="https://anotepad.com/notes/b2pnfkhe" target="_blank">LINK SCRIPT TRÊN VID</a>
-    </div>
+  <div class="thankyou" id="thankyou">✨ Cảm ơn bạn đã làm hết tất cả các bước ✨</div>
 
-    <p class="thankyou" id="thankyou">Cảm ơn bạn đã làm hết tất cả các bước!</p>
-</div>
-
-<!-- Audio click -->
-<audio id="clickSound">
-  <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-    const subBtn = document.getElementById('subBtn');
-    const likeBtn = document.getElementById('likeBtn');
-    const downloads = document.getElementById('downloads');
-    const thankyou = document.getElementById('thankyou');
-    const timerEl = document.getElementById('timer');
-    const clickSound = document.getElementById('clickSound');
-
+  <script>
     let tasksCompleted = 0;
 
-    function playClick() {
-        clickSound.currentTime = 0;
-        clickSound.play();
-    }
-
-    function startTimer() {
-        let count = 5;
-        timerEl.style.display = 'block';
-        const interval = setInterval(() => {
-            timerEl.textContent = count;
-            count--;
-            if(count < 0){
-                clearInterval(interval);
-                timerEl.style.display = 'none';
-                downloads.style.display = 'flex';
-                thankyou.style.display = 'block';
-            }
-        }, 1000);
-    }
-
-    function checkTasks() {
-        if(tasksCompleted === 2) {
-            startTimer(); // bắt đầu đếm ngược 5 giây
+    function completeTask(btn, link) {
+      window.open(link, "_blank"); // mở link
+      setTimeout(() => {
+        btn.classList.add("done");
+        btn.innerText = "✅ Done";
+        btn.disabled = true;
+        tasksCompleted++;
+        if (tasksCompleted === 2) {
+          setTimeout(() => {
+            let downloads = document.getElementById("downloads");
+            downloads.style.display = "block";
+            // hiệu ứng lần lượt xuất hiện
+            let btns = downloads.querySelectorAll(".download-btn");
+            btns.forEach((b, i) => {
+              b.style.animationDelay = (i * 0.5) + "s";
+            });
+            document.getElementById("thankyou").style.opacity = "1";
+          }, 5000); // đợi 5s mới hiện link
         }
+      }, 2000); // sau 2s đổi trạng thái
     }
-
-    subBtn.addEventListener('click', () => {
-        playClick();
-        subBtn.classList.add('done');
-        subBtn.textContent = 'Done';
-        subBtn.disabled = true;
-        tasksCompleted++;
-        checkTasks();
-        window.open('https://www.youtube.com/@ANGAMINGIOROID', '_blank');
-    });
-
-    likeBtn.addEventListener('click', () => {
-        playClick();
-        likeBtn.classList.add('done');
-        likeBtn.textContent = 'Done';
-        likeBtn.disabled = true;
-        tasksCompleted++;
-        checkTasks();
-        window.open('https://youtube.com/watch?v=xdbaRKKAoyg&si=jSsXTe4FkvOhhBzq', '_blank');
-    });
-</script>
+  </script>
 
 </body>
 </html>
